@@ -83,7 +83,7 @@ const initialState = (backgroundImageSrc, magnifyingGlassImgageSrc) => {
     magnifyingGlass.style.backgroundPosition = `-500px -915px`;
 }
 
-let bgPath = '../images/veronica_mars_poster_bw.jpg';
-let poster = '../images/veronica_mars_poster.jpg';
+let bgPath = './images/veronica_mars_poster_bw.jpg';
+let poster = './images/veronica_mars_poster.jpg';
 
 initialState(bgPath, poster);
