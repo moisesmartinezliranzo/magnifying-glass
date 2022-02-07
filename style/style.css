@@ -35,7 +35,6 @@ img{
   cursor: none;
   width: 150px;
   height: 150px;
-  background-image: url(../images/veronica_mars_poster.jpg);
   background-repeat: no-repeat;
   cursor: grab;
   overflow: hidden;
@@ -63,3 +62,21 @@ img{
     right: 0;
     pointer-events: none;
 }
+
+#rotate-message{
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url(../images/rotate-screen_tablet_01.png);
+    background-position: center center;
+    display: none;
+}
+
+@media (orientation: landscape){
+    #rotate-message{
+        display: block;
+    }
+}
+
