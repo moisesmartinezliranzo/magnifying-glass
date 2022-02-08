@@ -1,3 +1,4 @@
+
 const magnifyingGlassContainer = document.querySelector("#magnifying-glass-container");
 const backgroundImage = document.querySelector("#background-image");
 const magnifyingGlass = document.querySelector("#magnifying-glass");
@@ -22,36 +23,42 @@ const moveMagnifyingGlass = (event) => {
 
     if (e.type === "touchmove") {
         e = e.touches[0];
-
     }
 
-    if (isDown) {
-        let x = e.pageX - magnifyingGlassContainer.offsetLeft;
-        let y = e.pageY - magnifyingGlassContainer.offsetTop;
+    let x = e.pageX;
+    let y = e.pageY;
 
-        if ((x + magnifyingGlassContainer.offsetLeft) < Math.abs(offset[0])) {
+    if (isDown) {
+        if (x < Math.abs(offset[0])) {
             x = Math.abs(offset[0]);
         }
-
-        if ((x - Math.abs(offset[0])) > (magnifyingGlassContainer.clientWidth - magnifyingGlass.offsetWidth + magnifyingGlassContainer.offsetLeft - 12)) {
-            x = magnifyingGlassContainer.clientWidth - magnifyingGlass.offsetWidth + Math.abs(offset[0]) - 2;
+        if (x - Math.abs(offset[0]) > (magnifyingGlassContainer.clientWidth - magnifyingGlass.offsetWidth)) {
+            x = magnifyingGlassContainer.clientWidth - magnifyingGlass.offsetWidth + Math.abs(offset[0]);
         }
-
         if ((y + magnifyingGlassContainer.offsetTop) < Math.abs(offset[1])) {
             y = Math.abs(offset[1]);
         }
-
-        if ((y - Math.abs(offset[1])) > (magnifyingGlassContainer.clientHeight - magnifyingGlass.offsetHeight + magnifyingGlassContainer.offsetTop - 12)) {
-            y = magnifyingGlassContainer.clientHeight - magnifyingGlass.offsetHeight + Math.abs(offset[1]) - 2;
+        if ((y - Math.abs(offset[1])) > (magnifyingGlassContainer.clientHeight - magnifyingGlass.offsetHeight)) {
+            y = magnifyingGlassContainer.clientHeight - magnifyingGlass.offsetHeight + Math.abs(offset[1]);
         }
 
+        magnifyingGlass.style.left = `${x + offset[0]}px`;
+        magnifyingGlass.style.top = `${y + offset[1]}px`;
 
-        let backgroundPositionLeft = ((x + offset[0] + magnifyingGlassContainer.offsetLeft)) * zoom;
-        let backgroundPositionTop = ((y + offset[1] + magnifyingGlassContainer.offsetTop)) * zoom;
+        let left = ((x - Math.abs(offset[0])) * zoom);
 
-        magnifyingGlass.style.left = `${x + offset[0] + magnifyingGlassContainer.offsetLeft}px`;
-        magnifyingGlass.style.top = `${y + offset[1] + magnifyingGlassContainer.offsetTop}px`;
-        magnifyingGlass.style.backgroundPosition = `-${backgroundPositionLeft + (backgroundPositionLeft * 0.22)}px -${backgroundPositionTop}px`;
+        if (backgroundImage.width > 390 && backgroundImage.width < 428) {
+            left = left + Math.abs(left * 0.30);
+        }
+
+        if (backgroundImage.width <= 390) {
+            left = left + Math.abs(left * 0.43);
+        }
+
+        let top = (y - Math.abs(offset[1])) * zoom;
+
+        magnifyingGlass.style.backgroundPositionX = `-${left}px`;
+        magnifyingGlass.style.backgroundPositionY = `-${top}px`;
     }
 }
 
@@ -78,12 +85,15 @@ const mouseDown = (event) => {
 const initialState = (backgroundImageSrc, magnifyingGlassImgageSrc) => {
     backgroundImage.src = backgroundImageSrc;
     magnifyingGlass.style.backgroundImage = `url(${magnifyingGlassImgageSrc})`;
+
     magnifyingGlass.style.setProperty('top', 'calc(50% - 75px)');
     magnifyingGlass.style.setProperty('left', 'calc(50% - 75px)');
-    magnifyingGlass.style.backgroundPosition = `-500px -915px`;
+
+    magnifyingGlass.style.backgroundSize = `${backgroundImage.offsetWidth * zoom}px ${backgroundImage.offsetHeight * zoom}px`;;
+    magnifyingGlass.style.backgroundPosition = `-530px -900px`;
 }
 
-let bgPath = './images/veronica_mars_poster_bw.jpg';
-let poster = './images/veronica_mars_poster.jpg';
+let bgPath = 'https://raw.githubusercontent.com/moisesmartinezliranzo/magnifying-glass/main/images/veronica_mars_poster_bw.jpg';
+let poster = 'https://raw.githubusercontent.com/moisesmartinezliranzo/magnifying-glass/main/images/veronica_mars_poster.jpg';
 
 initialState(bgPath, poster);
