@@ -4,7 +4,8 @@
   "description": "Creative feature development, magnifying glass",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "live-server ."
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/moisesmartinezliranzo/magnifying-glass/issues"
   },
-  "homepage": "https://github.com/moisesmartinezliranzo/magnifying-glass#readme"
+  "homepage": "https://github.com/moisesmartinezliranzo/magnifying-glass#readme",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
 }
