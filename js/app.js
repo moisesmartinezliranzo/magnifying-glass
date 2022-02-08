@@ -47,7 +47,7 @@ const moveMagnifyingGlass = (event) => {
 
         let left = ((x - Math.abs(offset[0])) * zoom);
 
-        if (backgroundImage.width > 390 && backgroundImage.width < 428) {
+        if (backgroundImage.width > 390 && backgroundImage.width <= 428) {
             left = left + Math.abs(left * 0.30);
         }
 
@@ -89,7 +89,7 @@ const initialState = (backgroundImageSrc, magnifyingGlassImgageSrc) => {
     magnifyingGlass.style.setProperty('top', 'calc(50% - 75px)');
     magnifyingGlass.style.setProperty('left', 'calc(50% - 75px)');
 
-    magnifyingGlass.style.backgroundSize = `${backgroundImage.offsetWidth * zoom}px ${backgroundImage.offsetHeight * zoom}px`;;
+    magnifyingGlass.style.backgroundSize = `${backgroundImage.offsetWidth * zoom}px ${backgroundImage.offsetHeight * zoom}px`;
     magnifyingGlass.style.backgroundPosition = `-530px -900px`;
 }
 
